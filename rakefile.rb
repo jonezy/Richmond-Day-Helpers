@@ -24,6 +24,8 @@ puts $NUGET_OUTPUT_DIR
   Rake::Task["build"].invoke("Release")
   Rake::Task["spec"].invoke
 
+  Dir.mkdir($NUGET_OUTPUT_DIR) unless File.directory?($NUGET_OUTPUT_DIR)
+
   system("nuget pack  #{$PROJECT_NAME}/#{$PROJECT_NAME}.csproj -Version #{$VERSION_NUMBER} -Prop Configuration=Release -OutputDirectory #{$NUGET_OUTPUT_DIR}")
 end
 
